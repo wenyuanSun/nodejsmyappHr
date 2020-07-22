@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>管理员</title>
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+    <script type="text/javascript" src="../js/layer/layer.js"></script>
+    <script type="text/javascript" src="../js/vue.min.js"></script>
+    <link href="../css/sb-admin.css" rel="stylesheet">
+    <link href="../css/plugins/morris.css" rel="stylesheet">
+    <link href="../css/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div id="wrapper">
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+
+            <a class="navbar-brand">Admin</a>
+        </div>
+        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li class="active">
+                    <a ><i class="fa fa-fw fa-edit"></i> 用户信息</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
+
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        <small>用户信息填写</small>
+                    </h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> 用户信息添加</h3>
+                        </div>
+                        <div class="panel-body" id="userMessageDiv">
+
+
+
+                            <!--                            显示用户-->
+                            <div id="big">
+                                <form class="form-horizontal" id="userMessage">
+                                    <div class="form-group">
+                                        <label for="username" class="col-sm-2 control-label">用户名</label>
+                                        <div class="col-sm-10">
+                                            <input type="email" class="form-control" id="username" name="username" placeholder="请输入用户名">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="username" class="col-sm-2 control-label">性别</label>
+                                        <div class="col-sm-10">
+                                            <select name="sex">
+                                                <option value="0">男</option>
+                                                <option value="1">女</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="username" class="col-sm-2 control-label">注册日期</label>
+                                        <div class="col-sm-10">
+                                            <select class="sel_year" name="YYYY">
+                                                <option value="">请选择</option>
+                                            </select>
+                                            <font>年</font>
+                                            <select class="sel_month" name="MM">
+                                                <option value="">请选择</option>
+                                            </select>
+                                            <font>月</font>
+                                            <select class="sel_day" name="DD">
+                                                <option value="">请选择</option>
+                                            </select>
+                                            <font>日</font>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="username" class="col-sm-2 control-label">家庭住址</label>
+                                        <div class="col-sm-10">
+                                            <textarea name="site">
+
+                                            </textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button type="button" class="btn btn-default" @click="putIn()">提交</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<script language="JavaScript">
+    $(function () {
+        $.ms_DatePicker({
+            YearSelector: ".sel_year",
+            MonthSelector: ".sel_month",
+            DaySelector: ".sel_day"
+        });
+    });
+
+    (function($){
+        $.extend({
+            ms_DatePicker: function (options) {
+                var defaults = {
+                    YearSelector: "#sel_year",
+                    MonthSelector: "#sel_month",
+                    DaySelector: "#sel_day",
+                    FirstText: "--",
+                    FirstValue: 0
+                };
+                var opts = $.extend({}, defaults, options);
+                var $YearSelector = $(opts.YearSelector);
+                var $MonthSelector = $(opts.MonthSelector);
+                var $DaySelector = $(opts.DaySelector);
+                var FirstText = opts.FirstText;
+                var FirstValue = opts.FirstValue;
+
+                // 初始化
+                var str = "<option value=\"" + FirstValue + "\">"+FirstText+"</option>";
+                $YearSelector.html(str);
+                $MonthSelector.html(str);
+                $DaySelector.html(str);
+
+                // 年份列表
+                var yearNow = new Date().getFullYear();
+                var yearSel = $YearSelector.attr("rel");
+                for (var i = yearNow; i >= 1900; i--) {
+                    var sed = yearSel==i?"selected":"";
+                    var yearStr = "<option value=\"" + i + "\" " + sed+">"+i+"</option>";
+                    $YearSelector.append(yearStr);
+                }
+
+                // 月份列表
+                var monthSel = $MonthSelector.attr("rel");
+                for (var i = 1; i <= 12; i++) {
+                    var sed = monthSel==i?"selected":"";
+                    var monthStr = "<option value=\"" + i + "\" "+sed+">"+i+"</option>";
+                    $MonthSelector.append(monthStr);
+                }
+
+                // 日列表(仅当选择了年月)
+                function BuildDay() {
+                    if ($YearSelector.val() == 0 || $MonthSelector.val() == 0) {
+                        // 未选择年份或者月份
+                        $DaySelector.html(str);
+                    } else {
+                        $DaySelector.html(str);
+                        var year = parseInt($YearSelector.val());
+                        var month = parseInt($MonthSelector.val());
+                        var dayCount = 0;
+                        switch (month) {
+                            case 1:
+                            case 3:
+                            case 5:
+                            case 7:
+                            case 8:
+                            case 10:
+                            case 12:
+                                dayCount = 31;
+                                break;
+                            case 4:
+                            case 6:
+                            case 9:
+                            case 11:
+                                dayCount = 30;
+                                break;
+                            case 2:
+                                dayCount = 28;
+                                if ((year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0)) {
+                                    dayCount = 29;
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+
+                        var daySel = $DaySelector.attr("rel");
+                        for (var i = 1; i <= dayCount; i++) {
+                            var sed = daySel==i?"selected":"";
+                            var dayStr = "<option value=\"" + i + "\" "+sed+">" + i + "</option>";
+                            $DaySelector.append(dayStr);
+                        }
+                    }
+                }
+                $MonthSelector.change(function () {
+                    BuildDay();
+                });
+                $YearSelector.change(function () {
+                    BuildDay();
+                });
+                if($DaySelector.attr("rel")!=""){
+                    BuildDay();
+                }
+            } // End ms_DatePicker
+        });
+    })(jQuery);
+</script>
+<!-- jQuery -->
+<!--<script src="../js/jquery.min.js"></script>-->
+<script src="../js/bootstrap.js"></script>
+<script src="../js/raphael.min.js"></script>
+<script>
+    var app=new Vue({
+        el:"#userMessageDiv",
+        methods:{
+            putIn:function () {$.ajax({
+                type:"POST",
+                url:"../api/addUserInfo",
+                dataType:"json",
+                data:$('#userMessage').serialize(),//提交表单id
+                success:function (msg) {
+                    if (msg.code === 1){
+                        layer.msg(msg.message,{icon:1},function () {
+                            location.reload();
+                        });
+                    }else if (msg.code === -1){
+                        layer.msg(msg.message,{icon:2});
+                    }else {
+                        layer.msg(msg.message,{icon:2});
+                    }
+                }
+            })
+            }
+        }
+    })
+</script>
+</body>
+</html>

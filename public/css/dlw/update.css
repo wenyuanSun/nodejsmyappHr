@@ -1,0 +1,26 @@
+#update{
+    height: 800px;
+    width: 1500px;
+    background-color:#FFFFFF;
+    top: 90px;
+    position: relative;
+    display: table-cell;
+}
+/*#a2{
+    height: 405px;
+    width: 1500px;
+    background-color: #a6e1ec;
+    top: 220px;
+}*/
+#a3{
+    position: relative;
+}
+#pag{
+    border: 1px;
+    overflow: hidden;
+    position: relative;
+    display: table-cell;
+    left: 500px;
+    text-align: center;
+    vertical-align: middle;
+}

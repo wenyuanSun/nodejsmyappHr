@@ -1,0 +1,41 @@
+#ce{
+    height: 1550px;
+    width: 220px;
+    background-color: #9acfea;
+    top: 50px;
+    left: -150px;
+}
+#ap1{
+    height: 770px;
+    width: 950px;
+    background-color: #5cb85c;
+    top: 50px;
+    left: -100px;
+}
+#ap2{
+    height: 670px;
+    width: 950px;
+    background-color: #5cb85c;
+    top: 60px;
+    left: -100px;
+}
+/*#a1{
+    position: relative;
+    left: 370px;
+    top: 600px;
+}
+#a2{
+    position: relative;
+    left: 370px;
+    top: 185px;
+}*/
+#pag{
+    border: 1px;
+    overflow: hidden;
+    position: relative;
+    display: table-cell;
+    left: 400px;
+    top: 100px;
+    text-align: center;
+    vertical-align: middle;
+}
